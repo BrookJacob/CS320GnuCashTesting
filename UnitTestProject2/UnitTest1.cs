@@ -608,6 +608,224 @@ namespace UnitTestProject2
             }
         }
 
+        [TestMethod]
+        public void OpenAccountandSetDatetofuture()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(78, 210);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(206, 77);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(103, 182);
+                aut.w.Mouse.Click(c);
+                for (int i = 0; i < 100; i++)
+                {
+                    var d = new System.Windows.Point(192, 206);
+                    aut.w.Mouse.Click(d);
+                }
+                var e = new System.Windows.Point(277, 129);
+                aut.w.Mouse.Click(e);
+                var f = new System.Windows.Point(659, 590);
+                aut.w.Mouse.Click(f);
+                var g = new System.Windows.Point(48, 81);
+                aut.w.Mouse.Click(g);
+                TerminateApp(aut);
+            }
+        }
+
+        [TestMethod]
+        public void OpenAccountandSetDatetopast()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(78, 210);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(206, 77);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(103, 182);
+                aut.w.Mouse.Click(c);
+                for (int i = 0; i < 100; i++)
+                {
+                    var d = new System.Windows.Point(146, 206);
+                    aut.w.Mouse.Click(d);
+                }
+                var e = new System.Windows.Point(277, 129);
+                aut.w.Mouse.Click(e);
+                var f = new System.Windows.Point(659, 590);
+                aut.w.Mouse.Click(f);
+                var g = new System.Windows.Point(48, 81);
+                aut.w.Mouse.Click(g);
+                TerminateApp(aut);
+            }
+        }
+        [TestMethod]
+        public void OpenAccountandSetInvalidMonth()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(78, 210);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(206, 77);
+                aut.w.Mouse.Click(b);
+
+                aut.w.Keyboard.Enter("12/45/2015");
+
+                var e = new System.Windows.Point(277, 129);
+                aut.w.Mouse.Click(e);
+                var f = new System.Windows.Point(659, 590);
+                aut.w.Mouse.Click(f);
+                var g = new System.Windows.Point(48, 81);
+                aut.w.Mouse.Click(g);
+                TerminateApp(aut);
+            }
+        }
+        [TestMethod]
+        public void OpenAccountandSetInvalidDay()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(78, 210);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(206, 77);
+                aut.w.Mouse.Click(b);
+
+                aut.w.Keyboard.Enter("13/1/2018");
+
+                var e = new System.Windows.Point(277, 129);
+                aut.w.Mouse.Click(e);
+                var f = new System.Windows.Point(659, 590);
+                aut.w.Mouse.Click(f);
+                var g = new System.Windows.Point(48, 81);
+                aut.w.Mouse.Click(g);
+                TerminateApp(aut);
+            }
+        }
+        [TestMethod]
+        public void OpenAccountandSetInvalidYear()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(78, 210);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(206, 77);
+                aut.w.Mouse.Click(b);
+
+                aut.w.Keyboard.Enter("12/1/-1");
+
+                var e = new System.Windows.Point(277, 129);
+                aut.w.Mouse.Click(e);
+                var f = new System.Windows.Point(659, 590);
+                aut.w.Mouse.Click(f);
+                var g = new System.Windows.Point(48, 81);
+                aut.w.Mouse.Click(g);
+                TerminateApp(aut);
+            }
+        }
+        [TestMethod]
+        public void OpenAndModifyTransactionName()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(86, 206);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(204, 76);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(181, 183);
+                aut.w.Mouse.Click(c);
+
+                aut.w.Keyboard.Enter("New Transaction");
+                var d = new System.Windows.Point(273, 129);
+                aut.w.Mouse.Click(d);
+                var f = new System.Windows.Point(638, 593);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+
+                var g = new System.Windows.Point(678, 581);
+                aut.w.Mouse.Click(g);
+            }
+        }
+
+        [TestMethod]
+        public void OpenAndDeleteTransaction()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(86, 206);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(204, 76);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(181, 183);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(297, 78);
+                aut.w.Mouse.Click(d);
+                var f = new System.Windows.Point(568, 602);
+                aut.w.Mouse.Click(f);
+                var g = new System.Windows.Point(274, 128);
+                aut.w.Mouse.Click(g);
+                TerminateApp(aut);
+
+                var h = new System.Windows.Point(678, 581);
+                aut.w.Mouse.Click(h);
+            }
+        }
+        [TestMethod]
+        public void EnterInvaldExpenseNumber()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(86, 206);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(204, 76);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(956, 183);
+                aut.w.Mouse.Click(c);
+
+                aut.w.Keyboard.Enter("111,111,111,111,111,111.00 \r");
+                var d = new System.Windows.Point(273, 129);
+                aut.w.Mouse.Click(d);
+                var f = new System.Windows.Point(762, 595);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+
+                var g = new System.Windows.Point(752, 581);
+                aut.w.Mouse.Click(g);
+            }
+        }
+
+        //111,111,111,111,111,111.00
+        [TestMethod]
+        public void CreateAndCloseWithoutSaving()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(86, 206);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(204, 76);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(181, 183);
+                aut.w.Mouse.Click(c);
+                aut.w.Keyboard.Enter("New Transaction");
+                var d = new System.Windows.Point(273, 129);
+                aut.w.Mouse.Click(d);
+                var f = new System.Windows.Point(330, 594);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+            }
+        }
+
         private AppUnderTest StartApp()
         {
             AppUnderTest aut = new AppUnderTest();
