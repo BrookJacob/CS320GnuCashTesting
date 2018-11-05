@@ -14,7 +14,9 @@ namespace UnitTestProject2
     [TestClass]
     public class UnitTest1
     {
-        private string appPathUnderTest = @"C:\Users\krobinson20\Desktop\GnuTests";
+        //private string appPathUnderTest = @"C:\Users\krobinson20\Desktop\GnuTests";
+        //private string appPathUnderTest = @"C:\Users\jbrook19\Desktop\GnuTests";
+        private string appPathUnderTest = @"C:\Users\jhagedorn20\Desktop\GnuTests";
         private string appUnderTest = @"Jacob.gnucash";
         private string windowPrefix = "Jacob.gnucash ";
         private string[] menuFileExit = { "File", "Exit" };
@@ -1022,6 +1024,36 @@ namespace UnitTestProject2
                 TerminateApp(aut);
             }
         }
+
+        [TestMethod]
+        public void CreateNewBudget()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var e = new System.Windows.Point(563, 453);
+                aut.w.Mouse.DoubleClick(e);
+                aut.w.Mouse.Click(e);
+
+
+                aut.w = GetWindow(aut, "Budget Options ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter("New Budget");
+
+
+                TerminateApp(aut);
+            }
+        }
+
 
         private AppUnderTest StartApp()
         {
