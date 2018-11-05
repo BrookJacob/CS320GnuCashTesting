@@ -27,6 +27,17 @@ namespace UnitTestProject2
             public Window w;
         }
 
+        /*
+        [TestMethod]
+        public void CreateJacobFile()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+
+            }
+        }*/
+
         [TestMethod]
         public void Closed()
         {
@@ -1025,9 +1036,12 @@ namespace UnitTestProject2
             }
         }
 
+
+        //This test Creates AND saves a new budget to be used for the other budget tests
         [TestMethod]
         public void CreateNewBudget()
         {
+            string BudgetName = "Money Manager";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -1047,12 +1061,22 @@ namespace UnitTestProject2
                 aut.w = GetWindow(aut, "Budget Options ");
 
                 System.Threading.Thread.Sleep(2000);
-                aut.w.Keyboard.Enter("New Budget");
+                aut.w.Keyboard.Enter(BudgetName);
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+                var g = new System.Windows.Point(48, 80);
+                aut.w.Mouse.Click(g);
+                var h = new System.Windows.Point(379, 128);
+                aut.w.Mouse.Click(h);
+
 
 
                 TerminateApp(aut);
             }
         }
+
+
 
 
         private AppUnderTest StartApp()
