@@ -595,7 +595,7 @@ namespace UnitTestProject2
             }
         }
 
-
+        //My tests span from ChangeTransactionDate to CreateTransactionandCloseWithoutSaving on line 1145
         [TestMethod]
         public void ChangeTransactionDate()
         {
@@ -1014,6 +1014,114 @@ namespace UnitTestProject2
                 aut.w.Mouse.Click(g);
             }
         }
+
+        [TestMethod]
+        public void DuplicateTransaction()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(86, 206);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(204, 76);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(181, 183);
+                aut.w.Mouse.Click(c);
+                aut.w.Keyboard.Enter("New Transaction");
+                var d = new System.Windows.Point(218, 80);
+                aut.w.Mouse.Click(d);
+                var f = new System.Windows.Point(564, 586);
+                aut.w.Mouse.Click(f);
+                var g = new System.Windows.Point(274, 128);
+                aut.w.Mouse.Click(g);
+                TerminateApp(aut);
+                var h = new System.Windows.Point(658, 593);
+                aut.w.Mouse.Click(h);
+            }
+        }
+        [TestMethod]
+        public void CreateTransactionWithButtons()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(86, 206);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(204, 76);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(181, 183);
+                aut.w.Mouse.Click(c);
+                aut.w.Keyboard.Enter("New Transaction");
+                var d = new System.Windows.Point(384, 75);
+                aut.w.Mouse.Click(d);
+                var f = new System.Windows.Point(274, 129);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+                var g = new System.Windows.Point(658, 593);
+                aut.w.Mouse.Click(g);
+            }
+        }
+        [TestMethod]
+        public void CancelTransactionWithButtons()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(86, 206);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(204, 76);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(181, 183);
+                aut.w.Mouse.Click(c);
+                aut.w.Keyboard.Enter("New Transaction");
+                var d = new System.Windows.Point(456, 75);
+                aut.w.Mouse.Click(d);
+                var f = new System.Windows.Point(274, 129);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+                var g = new System.Windows.Point(658, 593);
+                aut.w.Mouse.Click(g);
+            }
+        }
+        [TestMethod]
+        public void CopyandPasteTransaction()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(86, 206);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(204, 76);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(181, 183);
+                aut.w.Mouse.Click(c);
+                aut.w.Keyboard.Enter("New Transaction ");
+                var m = new System.Windows.Point(383, 72);
+                aut.w.Mouse.Click(m);
+                var d = new System.Windows.Point(205, 186);
+                aut.w.Mouse.Click(d);
+                var f = new System.Windows.Point(162, 46);
+                aut.w.Mouse.Click(f);
+                var g = new System.Windows.Point(183, 96);
+                aut.w.Mouse.Click(g);
+                var h = new System.Windows.Point(133, 207);
+                aut.w.Mouse.Click(h);
+                var i = new System.Windows.Point(176, 48);
+                aut.w.Mouse.Click(i);
+                var j = new System.Windows.Point(165, 120);
+                aut.w.Mouse.Click(j);
+                var k = new System.Windows.Point(276, 128);
+                aut.w.Mouse.Click(k);
+                var n = new System.Windows.Point(681, 620);
+                aut.w.Mouse.Click(n);
+                TerminateApp(aut);
+                var l = new System.Windows.Point(658, 619);
+                aut.w.Mouse.Click(l);
+            }
+        }
+
         [TestMethod]
         public void CreateTransactionAndCloseWithoutSaving()
         {
