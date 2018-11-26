@@ -88,7 +88,6 @@ C:\Users\krobinson20\Documents\CS320GnuCashTesting\UnitTestProject2\bin\Debug\Mi
 C:\Users\krobinson20\Documents\CS320GnuCashTesting\UnitTestProject2\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
 C:\Users\krobinson20\Documents\CS320GnuCashTesting\UnitTestProject2\bin\Debug\TestStack.White.pdb
 C:\Users\krobinson20\Documents\CS320GnuCashTesting\UnitTestProject2\bin\Debug\TestStack.White.xml
-C:\Users\krobinson20\Documents\CS320GnuCashTesting\UnitTestProject2\obj\Debug\UnitTestProject2.csprojAssemblyReference.cache
 C:\Users\krobinson20\Documents\CS320GnuCashTesting\UnitTestProject2\obj\Debug\UnitTestProject2.csproj.CoreCompileInputs.cache
 C:\Users\krobinson20\Documents\CS320GnuCashTesting\UnitTestProject2\obj\Debug\UnitTestProject2.csproj.CopyComplete
 C:\Users\krobinson20\Documents\CS320GnuCashTesting\UnitTestProject2\obj\Debug\UnitTestProject2.dll
