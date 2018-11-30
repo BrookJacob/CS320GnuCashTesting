@@ -15,8 +15,8 @@ namespace UnitTestProject2
     public class UnitTest1
     {
         //private string appPathUnderTest = @"C:\Users\krobinson20\Desktop\GnuTests";
-        //private string appPathUnderTest = @"C:\Users\jbrook19\Desktop\GnuTests";
-        private string appPathUnderTest = @"C:\Users\krobinson20\Desktop\GnuCashTests";
+        private string appPathUnderTest = @"C:\Users\jbrook19\Desktop\GnuTests";
+        //private string appPathUnderTest = @"C:\Users\krobinson20\Desktop\GnuCashTests";
         private string appUnderTest = @"Jacob.gnucash";
         private string windowPrefix = "Jacob.gnucash ";
         private string[] menuFileExit = { "File", "Exit" };
@@ -151,7 +151,7 @@ namespace UnitTestProject2
                 var a = new System.Windows.Point(560, 150);
                 aut.w.Mouse.Click(a);
                 TerminateApp(aut);
-                Assert.IsFalse(aut.w.IsClosed);
+                Assert.IsTrue(aut.w.IsClosed);
             }
         }
 
@@ -169,6 +169,40 @@ namespace UnitTestProject2
                 m.DoubleClick();
                 SetDimensions(aut, 1000, 1000);
                 TerminateApp(aut);
+            }
+        }
+
+        //This test is very hit or miss, saying we cant grab buttons.
+        //Occassionally pressing the forward button within the help window
+        //will cause the window to expand along the x-axis a tiny amount,
+        //but it depends on what the tip is and they are shown at random.
+        //This means if the tips are shown in the right order the test will run
+        //without a problem. However, if they don't appear in the right
+        //order, the test will eventually close it itself by pressing the
+        //close button when the mouse location is moved after 25 clicks,
+        //because the window didn't move far enough to the right along the
+        //x-axis for the mouse to be repositioned on the forward button again. 
+        [TestMethod]
+        public void TipOfTheDayForwardAndBack()
+        {
+            AppUnderTest aut = StartApp();
+            if(aut.w != null)
+            {
+                var a = new System.Windows.Point(439, 45);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(511, 93);
+                aut.w.Mouse.Click(b);
+                aut.w = GetWindow(aut, "GnuCash Tip Of The Day");
+                SetDimensions(aut, 500, 500);
+                for (int j = 425; j < 560;)
+                {
+                    var c = new System.Windows.Point(j, 467);
+                    for (int i = 0; i < 25; i++)
+                    {
+                        aut.w.Mouse.Click(c);
+                    }
+                    j += 45;
+                }
             }
         }
 
