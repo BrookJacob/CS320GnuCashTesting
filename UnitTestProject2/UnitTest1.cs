@@ -203,6 +203,7 @@ namespace UnitTestProject2
                     }
                     j += 45;
                 }
+                Assert.AreEqual(aut.w.Bounds.X, 500);
             }
         }
 
