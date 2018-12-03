@@ -600,7 +600,6 @@ namespace UnitTestProject2
             }
         }
 
-        //My tests span from ChangeTransactionDate to CreateTransactionandCloseWithoutSaving
         [TestMethod]
         public void ChangeTransactionDate()
         {
@@ -2689,6 +2688,171 @@ namespace UnitTestProject2
         }
 
         [TestMethod]
+        public void BudgetSymbolDayIncrement()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var g = new System.Windows.Point(628, 544);
+                aut.w.Mouse.Click(g);
+                var i = new System.Windows.Point(631, 489);
+                aut.w.Mouse.Click(i);
+                var e = new System.Windows.Point(500, 541);
+                aut.w.Mouse.DoubleClick(e);
+                aut.w.Mouse.Click(e);
+
+
+                aut.w = GetWindow(aut, "Budget Options ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter("%");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+                var h = new System.Windows.Point(379, 128);
+                aut.w.Mouse.Click(h);
+
+
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void BudgetSymbolWeekIncrement()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var g = new System.Windows.Point(628, 544);
+                aut.w.Mouse.Click(g);
+                var i = new System.Windows.Point(631, 515);
+                aut.w.Mouse.Click(i);
+                var e = new System.Windows.Point(500, 541);
+                aut.w.Mouse.DoubleClick(e);
+                aut.w.Mouse.Click(e);
+
+
+                aut.w = GetWindow(aut, "Budget Options ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter("%");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+                var h = new System.Windows.Point(379, 128);
+                aut.w.Mouse.Click(h);
+
+
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void BudgetSymbolMonthIncrement()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var e = new System.Windows.Point(500, 541);
+                aut.w.Mouse.DoubleClick(e);
+                aut.w.Mouse.Click(e);
+
+
+                aut.w = GetWindow(aut, "Budget Options ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter("%");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+                var h = new System.Windows.Point(379, 128);
+                aut.w.Mouse.Click(h);
+
+
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void BudgetSymbolYearIncrement()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var g = new System.Windows.Point(628, 544);
+                aut.w.Mouse.Click(g);
+                var i = new System.Windows.Point(631, 572);
+                aut.w.Mouse.Click(i);
+                var e = new System.Windows.Point(500, 541);
+                aut.w.Mouse.DoubleClick(e);
+                aut.w.Mouse.Click(e);
+
+
+                aut.w = GetWindow(aut, "Budget Options ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter("%");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+                var h = new System.Windows.Point(379, 128);
+                aut.w.Mouse.Click(h);
+
+
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+
+        [TestMethod]
         public void BudgetPeriodsTopBound()
         {
             AppUnderTest aut = StartApp();
@@ -2788,6 +2952,338 @@ namespace UnitTestProject2
                 aut.w.Mouse.Click(h);
 
 
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void BudgetOptionsEnterInvalidMonthTop()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var g = new System.Windows.Point(507, 542);
+                aut.w.Mouse.DoubleClick(g);
+
+                aut.w = GetWindow(aut, "Budget Options ");
+                aut.w.Keyboard.Enter("64/11/2018");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+
+        [TestMethod]
+        public void BudgetOptionsEnterInvalidMonthBottom()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var g = new System.Windows.Point(507, 542);
+                aut.w.Mouse.DoubleClick(g);
+
+                aut.w = GetWindow(aut, "Budget Options ");
+                aut.w.Keyboard.Enter("0/11/2018");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void BudgetOptionsEnterValidMonth()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var g = new System.Windows.Point(507, 542);
+                aut.w.Mouse.DoubleClick(g);
+
+                aut.w = GetWindow(aut, "Budget Options ");
+                aut.w.Keyboard.Enter("1/11/2018");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+
+        [TestMethod]
+        public void BudgetOptionsEnterInvalidDayTop()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var g = new System.Windows.Point(507, 542);
+                aut.w.Mouse.DoubleClick(g);
+
+                aut.w = GetWindow(aut, "Budget Options ");
+                aut.w.Keyboard.Enter("1/64/2018");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void BudgetOptionsEnterInvalidDayBottom()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var g = new System.Windows.Point(507, 542);
+                aut.w.Mouse.DoubleClick(g);
+
+                aut.w = GetWindow(aut, "Budget Options ");
+                aut.w.Keyboard.Enter("1/0/2018");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void BudgetOptionsEnterValidDay()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var g = new System.Windows.Point(507, 542);
+                aut.w.Mouse.DoubleClick(g);
+
+                aut.w = GetWindow(aut, "Budget Options ");
+                aut.w.Keyboard.Enter("1/14/2018");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void BudgetOptionsEnterInvalidYearTop()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var g = new System.Windows.Point(507, 542);
+                aut.w.Mouse.DoubleClick(g);
+
+                aut.w = GetWindow(aut, "Budget Options ");
+                aut.w.Keyboard.Enter("1/14/20000000000000000000000000000000000000");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void BudgetOptionsEnterInvalidYearBottom()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var g = new System.Windows.Point(507, 542);
+                aut.w.Mouse.DoubleClick(g);
+
+                aut.w = GetWindow(aut, "Budget Options ");
+                aut.w.Keyboard.Enter("1/14/0");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void BudgetOptionsEnterValidYear()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var g = new System.Windows.Point(507, 542);
+                aut.w.Mouse.DoubleClick(g);
+
+                aut.w = GetWindow(aut, "Budget Options ");
+                aut.w.Keyboard.Enter("1/14/2020");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void BudgetOptionsEnterInvalidCharacter()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var g = new System.Windows.Point(507, 542);
+                aut.w.Mouse.DoubleClick(g);
+
+                aut.w = GetWindow(aut, "Budget Options ");
+                aut.w.Keyboard.Enter("%");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void BudgetOptionsEnterNothing()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(156, 44);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(250, 115);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var g = new System.Windows.Point(507, 542);
+                aut.w.Mouse.DoubleClick(g);
+
+                aut.w = GetWindow(aut, "Budget Options ");
+                aut.w.Keyboard.Enter("\b");
+
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
