@@ -8,15 +8,18 @@ using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.InputDevices;
 using System.Windows.Automation;
+using System.Threading;
+using System.Windows;
 
 namespace UnitTestProject2
 {
+
     [TestClass]
-    public class UnitTest1
+    public sealed class UnitTest1
     {
         //private string appPathUnderTest = @"C:\Users\krobinson20\Desktop\GnuTests";
-        //private string appPathUnderTest = @"C:\Users\jbrook19\Desktop\GnuTests";
-        private string appPathUnderTest = @"C:\Users\jhagedorn20\Desktop\GnuTests";
+        private string appPathUnderTest = @"C:\Users\jbrook19\Desktop\GnuTests";
+        //private string appPathUnderTest = @"C:\Users\jhagedorn20\Desktop\GnuTests";
         private string appUnderTest = @"Jacob.gnucash";
         private string windowPrefix = "Jacob.gnucash ";
         private string[] menuFileExit = { "File", "Exit" };
@@ -34,7 +37,7 @@ namespace UnitTestProject2
             if (aut.w != null)
             {
                 TerminateApp(aut);
-                Assert.IsFalse(aut.w.IsClosed);
+                Assert.IsTrue(aut.w.IsClosed);
             }
         }
 
@@ -621,11 +624,21 @@ namespace UnitTestProject2
                 aut.w.Keyboard.Enter("Hello World! Does this work");
                 aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
 
+                aut.w.Mouse.Click(a);
+                aut.w.Mouse.Click(b);
                 aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
                 aut.w.Keyboard.Enter("C");
                 aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
 
+                aut.w.Mouse.Click(a);
+                aut.w.Mouse.Click(b);
+                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+                aut.w.Keyboard.Enter("C");
+                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
 
+                System.Threading.Thread.Sleep(2000);
                 TerminateApp(aut);
             }
         }
@@ -636,13 +649,21 @@ namespace UnitTestProject2
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
+                string StringToTest = "Hello\nWorld";
                 var a = new System.Windows.Point(155, 45);
                 aut.w.Mouse.Click(a);
                 var b = new System.Windows.Point(181, 361);
                 aut.w.Mouse.Click(b);
-                aut.w.Keyboard.Enter("Hello\nWorld");
+                aut.w.Keyboard.Enter(StringToTest);
                 aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
+                aut.w.Mouse.Click(a);
+                aut.w.Mouse.Click(b);
+                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+                aut.w.Keyboard.Enter("c");
+                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+                Assert.AreNotEqual(GetClipboardData(), StringToTest);
                 TerminateApp(aut);
+
             }
         }
 
@@ -658,6 +679,31 @@ namespace UnitTestProject2
                 aut.w.Mouse.Click(b);
                 aut.w.Keyboard.Enter("\x13");
                 aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
+                TerminateApp(aut);
+            }
+        }
+        [TestMethod]
+        public void TipOfTheDayForwardBack()
+        {
+            AppUnderTest aut = StartApp();
+            if(aut.w != null)
+            {
+                var a = new System.Windows.Point(440, 45);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(470, 95);
+                aut.w.Mouse.Click(b);
+                aut.w = GetWindow(aut, "GnuCash Tip Of The Day");
+                SetDimensions(aut, 500, 500);
+                var x = aut.w.Bounds.Width - 115;
+                var c = new System.Windows.Point(x, 465);
+
+                for (int i = 0; i < 55; i++)
+                {
+                    aut.w.Mouse.Click(c);
+                }
+
+                Assert.AreEqual(500, aut.w.Bounds.Width);
+                aut.w = GetWindow(aut, windowPrefix);
                 TerminateApp(aut);
             }
         }
@@ -3598,6 +3644,12 @@ namespace UnitTestProject2
                     w = win;
             }
             return w;
+        }
+
+        public string GetClipboardData()
+        {
+            string clpbrdData = System.Windows.Forms.Clipboard.GetText();
+            return clpbrdData;
         }
 
         private void TerminateApp(AppUnderTest aut)
