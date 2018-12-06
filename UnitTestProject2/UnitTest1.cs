@@ -3861,6 +3861,310 @@ namespace UnitTestProject2
             }
         }
 
+        [TestMethod]
+        public void JobRate()
+        {
+            string groupname = "GroupName.inc";
+            string job = "Justin";
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(220, 43);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(269, 72);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(428, 191);
+                aut.w.Mouse.Click(c);
+                var e = new System.Windows.Point(478, 450);
+                aut.w.Mouse.Click(e);
+
+                aut.w = GetWindow(aut, "New Job ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter(job);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter(groupname);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter("123");
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.DoubleClick(f);
+
+                aut.w = GetWindow(aut, "*Jacob.gnucash ");
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void JobRateInvalidNumber()
+        {
+            string groupname = "GroupName.inc";
+            string job = "Justin";
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(220, 43);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(269, 72);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(428, 191);
+                aut.w.Mouse.Click(c);
+                var e = new System.Windows.Point(478, 450);
+                aut.w.Mouse.Click(e);
+
+                aut.w = GetWindow(aut, "New Job ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter(job);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter(groupname);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter("11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.DoubleClick(f);
+
+                aut.w = GetWindow(aut, "*Jacob.gnucash ");
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void JobRateString()
+        {
+            string groupname = "GroupName.inc";
+            string job = "Justin";
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(220, 43);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(269, 72);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(428, 191);
+                aut.w.Mouse.Click(c);
+                var e = new System.Windows.Point(478, 450);
+                aut.w.Mouse.Click(e);
+
+                aut.w = GetWindow(aut, "New Job ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter(job);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter(groupname);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter("Justin");
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.DoubleClick(f);
+
+                aut.w = GetWindow(aut, "*Jacob.gnucash ");
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void JobRateSymbols()
+        {
+            string groupname = "GroupName.inc";
+            string job = "Justin";
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(220, 43);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(269, 72);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(428, 191);
+                aut.w.Mouse.Click(c);
+                var e = new System.Windows.Point(478, 450);
+                aut.w.Mouse.Click(e);
+
+                aut.w = GetWindow(aut, "New Job ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter(job);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter(groupname);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter("!@#$%^&*()_+");
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.DoubleClick(f);
+
+                aut.w = GetWindow(aut, "*Jacob.gnucash ");
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void JobBillingID()
+        {
+            string groupname = "GroupName.inc";
+            string job = "Justin";
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(220, 43);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(269, 72);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(428, 191);
+                aut.w.Mouse.Click(c);
+                var e = new System.Windows.Point(478, 450);
+                aut.w.Mouse.Click(e);
+
+                aut.w = GetWindow(aut, "New Job ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter(job);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter(groupname);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter("123456789");
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.DoubleClick(f);
+
+                aut.w = GetWindow(aut, "*Jacob.gnucash ");
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void JobBillingIDInvalidNumber()
+        {
+            string groupname = "GroupName.inc";
+            string job = "Justin";
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(220, 43);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(269, 72);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(428, 191);
+                aut.w.Mouse.Click(c);
+                var e = new System.Windows.Point(478, 450);
+                aut.w.Mouse.Click(e);
+
+                aut.w = GetWindow(aut, "New Job ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter(job);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter(groupname);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter("11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.DoubleClick(f);
+
+                aut.w = GetWindow(aut, "*Jacob.gnucash ");
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void JobBillingIDString()
+        {
+            string groupname = "GroupName.inc";
+            string job = "Justin";
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(220, 43);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(269, 72);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(428, 191);
+                aut.w.Mouse.Click(c);
+                var e = new System.Windows.Point(478, 450);
+                aut.w.Mouse.Click(e);
+
+                aut.w = GetWindow(aut, "New Job ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter(job);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter(groupname);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter("Justin");
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.DoubleClick(f);
+
+                aut.w = GetWindow(aut, "*Jacob.gnucash ");
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
+        [TestMethod]
+        public void JobBillingIDSymbols()
+        {
+            string groupname = "GroupName.inc";
+            string job = "Justin";
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(220, 43);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(269, 72);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(428, 191);
+                aut.w.Mouse.Click(c);
+                var e = new System.Windows.Point(478, 450);
+                aut.w.Mouse.Click(e);
+
+                aut.w = GetWindow(aut, "New Job ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter(job);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter(groupname);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.TAB);
+                aut.w.Keyboard.Enter("!@#$%^&*()_+");
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.DoubleClick(f);
+
+                aut.w = GetWindow(aut, "*Jacob.gnucash ");
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
+
 
         /*--------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
         private AppUnderTest StartApp()
