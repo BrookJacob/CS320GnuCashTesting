@@ -15,8 +15,8 @@ namespace UnitTestProject2
     public class UnitTest1
     {
         //private string appPathUnderTest = @"C:\Users\krobinson20\Desktop\GnuTests";
-        private string appPathUnderTest = @"C:\Users\jbrook19\Desktop\GnuTests";
-        //private string appPathUnderTest = @"C:\Users\jhagedorn20\Desktop\GnuTests";
+        //private string appPathUnderTest = @"C:\Users\jbrook19\Desktop\GnuTests";
+        private string appPathUnderTest = @"C:\Users\jhagedorn20\Desktop\GnuTests";
         private string appUnderTest = @"Jacob.gnucash";
         private string windowPrefix = "Jacob.gnucash ";
         private string[] menuFileExit = { "File", "Exit" };
@@ -33,7 +33,6 @@ namespace UnitTestProject2
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
-                SetDimensions(aut, 1000, 1000);
                 TerminateApp(aut);
                 Assert.IsFalse(aut.w.IsClosed);
             }
@@ -45,7 +44,6 @@ namespace UnitTestProject2
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
-                SetDimensions(aut, 1000, 1000);
                 var m = aut.w.Get<Button>("Maximize");
                 m.Click();
                 
@@ -63,7 +61,6 @@ namespace UnitTestProject2
                 var m = aut.w.Get<Button>("Restore");
                 m.Click();
                 Assert.AreEqual(aut.w.DisplayState, DisplayState.Restored);
-                SetDimensions(aut, 1000, 1000);
                 TerminateApp(aut);
             }
         }
@@ -87,7 +84,6 @@ namespace UnitTestProject2
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
-                SetDimensions(aut, 1000, 1000);
                 var m = aut.w.TitleBar;
                 m.RightClick();
                 var a = new System.Windows.Point(560, 122);
@@ -118,7 +114,6 @@ namespace UnitTestProject2
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
-                SetDimensions(aut, 1000, 1000);
                 var m = aut.w.TitleBar;
                 m.RightClick();
                 var a = new System.Windows.Point(560, 100);
@@ -134,7 +129,6 @@ namespace UnitTestProject2
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
-                SetDimensions(aut, 1000, 1000);
                 var m = aut.w.TitleBar;
                 m.RightClick();
                 var a = new System.Windows.Point(560, 150);
@@ -150,13 +144,11 @@ namespace UnitTestProject2
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
-                SetDimensions(aut, 1000, 1000);
                 var m = aut.w.TitleBar;
                 m.DoubleClick();
                 System.Threading.Thread.Sleep(3000);
                 Assert.AreEqual(aut.w.DisplayState, DisplayState.Maximized);
                 m.DoubleClick();
-                SetDimensions(aut, 1000, 1000);
                 TerminateApp(aut);
             }
         }
@@ -3510,6 +3502,32 @@ namespace UnitTestProject2
             }
         }
 
+        [TestMethod]
+        public void CustomerCreateNew()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(216, 45);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(257, 69);
+                aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(434, 95);
+                aut.w.Mouse.Click(c);
+
+                aut.w = GetWindow(aut, "New Customer ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter("Justin");
+                var f = new System.Windows.Point(648, 676);
+                aut.w.Mouse.Click(f);
+
+                TerminateApp(aut);
+                //this next click (var z) closes without saving
+                var z = new System.Windows.Point(340, 585);
+                aut.w.Mouse.Click(z);
+            }
+        }
 
 
         /*--------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -3543,7 +3561,7 @@ namespace UnitTestProject2
                     ws = aut.app.GetWindows();
                 }
             }
-
+            SetDimensions(aut, 1000, 1000);
             return aut;
         }
 
