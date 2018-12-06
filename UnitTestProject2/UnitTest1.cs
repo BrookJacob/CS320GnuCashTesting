@@ -617,6 +617,28 @@ namespace UnitTestProject2
         }
 
         [TestMethod]
+        public void Copy()
+        {
+            AppUnderTest aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(155, 45);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(181, 361);
+                aut.w.Mouse.Click(b);
+                aut.w.Keyboard.Enter("Hello World! Does this work");
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
+
+                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+                aut.w.Keyboard.Enter("C");
+                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+
+
+                TerminateApp(aut);
+            }
+        }
+
+        [TestMethod]
         public void RenamePageWithNewLine()
         {
             AppUnderTest aut = StartApp();
