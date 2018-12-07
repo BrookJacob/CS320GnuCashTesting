@@ -10,6 +10,7 @@ using TestStack.White.InputDevices;
 using System.Windows.Automation;
 using System.Threading;
 using System.Windows;
+using System.Diagnostics;
 
 namespace UnitTestProject2
 {
@@ -37,7 +38,8 @@ namespace UnitTestProject2
             if (aut.w != null)
             {
                 TerminateApp(aut);
-                Assert.IsTrue(aut.w.IsClosed);
+                System.Threading.Thread.Sleep(5000);
+                Assert.IsTrue(aut.app.HasExited);
             }
         }
 
@@ -92,6 +94,7 @@ namespace UnitTestProject2
                 var a = new System.Windows.Point(560, 122);
                 aut.w.Mouse.Click(a);
                 Assert.AreEqual(aut.w.DisplayState, DisplayState.Maximized);
+                m.DoubleClick();
                 TerminateApp(aut);
             }
         }
@@ -136,8 +139,8 @@ namespace UnitTestProject2
                 m.RightClick();
                 var a = new System.Windows.Point(560, 150);
                 aut.w.Mouse.Click(a);
-                TerminateApp(aut);
-                Assert.IsFalse(aut.w.IsClosed);
+                System.Threading.Thread.Sleep(5000);
+                Assert.IsTrue(aut.app.HasExited);
             }
         }
 
@@ -155,17 +158,33 @@ namespace UnitTestProject2
                 TerminateApp(aut);
             }
         }
-
+        //Fix this
         [TestMethod]
         public void QuitWithoutSaving()
         {
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
-                var a = new System.Windows.Point(26, 44);
+                var a = new System.Windows.Point(156, 44);
                 aut.w.Mouse.Click(a);
-                var b = new System.Windows.Point(117, 365);
+                var b = new System.Windows.Point(250, 115);
                 aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var e = new System.Windows.Point(563, 453);
+                aut.w.Mouse.DoubleClick(e);
+                aut.w.Mouse.Click(e);
+
+
+                aut.w = GetWindow(aut, "Budget Options ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter("Quit Without Saving");
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
+                var f = new System.Windows.Point(645, 675);
+                aut.w.Mouse.Click(f);
                 TerminateApp(aut);
             }
         }
@@ -198,26 +217,6 @@ namespace UnitTestProject2
                 var z = new System.Windows.Point(657, 585);
                 aut.w.Mouse.Click(z);
             }
-
-            AppUnderTest aut2 = StartApp();
-            if (aut2.w != null)
-            {
-                var a = new System.Windows.Point(85, 185);
-                aut2.w.Mouse.DoubleClick(a);
-                var b = new System.Windows.Point(100, 205);
-                aut2.w.Mouse.Click(b);
-                var c = new System.Windows.Point(275, 70);
-                aut2.w.Mouse.Click(c);
-                aut2.w = GetWindow(aut2, "Edit Account - ");
-                Assert.IsTrue(aut2.w.Title.Contains("Edit Account - "));
-                aut2.w.Close();
-                aut2.w = GetWindow(aut2, "Jacob.gnucash ");
-
-                TerminateApp(aut2);
-
-                var z = new System.Windows.Point(657, 585);
-                aut2.w.Mouse.Click(z);
-            }
         }
 
         //Does not like to click on subaccounts under expenses
@@ -248,30 +247,6 @@ namespace UnitTestProject2
                 var g = new System.Windows.Point(657, 585);
                 aut.w.Mouse.Click(g);
             }
-
-            AppUnderTest aut2 = StartApp();
-            if (aut2.w != null)
-            {
-                var a = new System.Windows.Point(130, 185);
-                aut2.w.Mouse.DoubleClick(a);
-                var b = new System.Windows.Point(85, 207);
-                aut2.w.Mouse.Click(b);
-                var c = new System.Windows.Point(273, 73);
-                aut2.w.Mouse.Click(c);
-                var d = new System.Windows.Point(500, 300);
-                aut2.w.Mouse.DoubleClick(d);
-                aut2.w = GetWindow(aut2, "Edit Account - ");
-                Assert.IsTrue(aut2.w.Title.Contains(AccountTitleToTest));
-
-                aut2.w.Close();
-                aut2.w = GetWindow(aut2, "Jacob.gnucash ");
-
-                TerminateApp(aut2);
-
-                var f = new System.Windows.Point(657, 585);
-                aut2.w.Mouse.Click(f);
-            }
-
         }
 
 
@@ -296,22 +271,6 @@ namespace UnitTestProject2
 
                 var f = new System.Windows.Point(657, 585);
                 aut.w.Mouse.Click(f);
-            }
-
-            AppUnderTest aut2 = StartApp();
-            if (aut2.w != null)
-            {
-                var a = new System.Windows.Point(73, 183);
-                aut2.w.Mouse.Click(a);
-                var b = new System.Windows.Point(430, 80);
-                aut2.w.Mouse.Click(b);
-                var ws = aut2.app.GetWindows();
-                Assert.AreEqual(1, ws.Count);
-
-                TerminateApp(aut2);
-
-                var f = new System.Windows.Point(657, 585);
-                aut2.w.Mouse.Click(f);
             }
         }
 
@@ -611,37 +570,6 @@ namespace UnitTestProject2
             }
         }
 
-        [TestMethod]
-        public void Copy()
-        {
-            AppUnderTest aut = StartApp();
-            if (aut.w != null)
-            {
-                var a = new System.Windows.Point(155, 45);
-                aut.w.Mouse.Click(a);
-                var b = new System.Windows.Point(181, 361);
-                aut.w.Mouse.Click(b);
-                aut.w.Keyboard.Enter("Hello World! Does this work");
-                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
-
-                aut.w.Mouse.Click(a);
-                aut.w.Mouse.Click(b);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("C");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
-
-                aut.w.Mouse.Click(a);
-                aut.w.Mouse.Click(b);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("C");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
-
-                System.Threading.Thread.Sleep(2000);
-                TerminateApp(aut);
-            }
-        }
 
         [TestMethod]
         public void RenamePageWithNewLine()
@@ -668,7 +596,7 @@ namespace UnitTestProject2
         }
 
         [TestMethod]
-        public void RenamePageWithByteAccess()
+        public void RenamePageWithTab()
         {
             AppUnderTest aut = StartApp();
             if (aut.w != null)
@@ -677,8 +605,12 @@ namespace UnitTestProject2
                 aut.w.Mouse.Click(a);
                 var b = new System.Windows.Point(181, 361);
                 aut.w.Mouse.Click(b);
-                aut.w.Keyboard.Enter("\x13");
+                aut.w.Keyboard.Enter("Hello\tWorld");
                 aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
+                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+                aut.w.Keyboard.Enter("c");
+                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+                Assert.AreNotEqual(GetClipboardData(), "HelloWorld");
                 TerminateApp(aut);
             }
         }
