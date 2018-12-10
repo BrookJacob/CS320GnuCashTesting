@@ -186,6 +186,34 @@ namespace UnitTestProject2
                 var f = new System.Windows.Point(645, 675);
                 aut.w.Mouse.Click(f);
                 TerminateApp(aut);
+                var g = new System.Windows.Point(655, 585);
+                aut.w.Mouse.Click(g);
+            }
+            aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(265, 125);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(290, 75);
+                aut.w.Mouse.Click(b);
+
+                aut.w = GetWindow(aut, "Budget Options ");
+
+                var c = new System.Windows.Point(500, 450);
+                aut.w.Mouse.Click(c);
+                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+                aut.w.Keyboard.Enter("ac");
+                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+
+                Assert.AreEqual(GetClipboardData(), "Quit Without Saving");
+                var d = new System.Windows.Point(645, 675);
+                aut.w.Mouse.Click(d);
+                aut.w = GetWindow(aut, "Jacob.gnucash");
+                var e = new System.Windows.Point(395, 127);
+                aut.w.Mouse.Click(e);
+                TerminateApp(aut);
+                var f = new System.Windows.Point(660, 585);
+                aut.w.Mouse.Click(f);
             }
         }
 
@@ -199,23 +227,26 @@ namespace UnitTestProject2
                 aut.w.Mouse.Click(a);
                 var b = new System.Windows.Point(253, 170);
                 aut.w.Mouse.Click(b);
-                var c = new System.Windows.Point(755, 677);
+
+                aut.w = GetWindow(aut, "New Account Hierarchy Setup");
+                SetDimensions(aut, 700, 700);
+
+                var c = new System.Windows.Point(633, 655);
                 aut.w.Mouse.Click(c);
-                var d = new System.Windows.Point(677, 677);
+                var d = new System.Windows.Point(555, 45);
                 aut.w.Mouse.Click(d);
-                var e = new System.Windows.Point(677, 677);
+                var e = new System.Windows.Point(265, 295);
                 aut.w.Mouse.Click(e);
-                var f = new System.Windows.Point(390, 420);
+                var f = new System.Windows.Point(471, 657);
                 aut.w.Mouse.Click(f);
-                var g = new System.Windows.Point(755, 677);
+                var g = new System.Windows.Point(555, 655);
                 aut.w.Mouse.Click(g);
-                var h = new System.Windows.Point(677, 677);
+                var h = new System.Windows.Point(555, 655);
                 aut.w.Mouse.Click(h);
+                var i = new System.Windows.Point(89, 207);
+                aut.w.Mouse.RightClick();
 
-                TerminateApp(aut);
 
-                var z = new System.Windows.Point(657, 585);
-                aut.w.Mouse.Click(z);
             }
         }
 
