@@ -10,6 +10,7 @@ using TestStack.White.InputDevices;
 using System.Windows.Automation;
 using System.Threading;
 using System.Windows;
+using System.Diagnostics;
 
 namespace UnitTestProject2
 {
@@ -18,8 +19,8 @@ namespace UnitTestProject2
     public sealed class UnitTest1
     {
         //private string appPathUnderTest = @"C:\Users\krobinson20\Desktop\GnuTests";
-        //private string appPathUnderTest = @"C:\Users\jbrook19\Desktop\GnuTests";
-        private string appPathUnderTest = @"C:\Users\jhagedorn20\Desktop\GnuTests";
+        private string appPathUnderTest = @"C:\Users\jbrook19\Desktop\GnuTests";
+        //private string appPathUnderTest = @"C:\Users\jhagedorn20\Desktop\GnuTests";
         private string appUnderTest = @"Jacob.gnucash";
         private string windowPrefix = "Jacob.gnucash ";
         private string[] menuFileExit = { "File", "Exit" };
@@ -37,7 +38,8 @@ namespace UnitTestProject2
             if (aut.w != null)
             {
                 TerminateApp(aut);
-                Assert.IsTrue(aut.w.IsClosed);
+                System.Threading.Thread.Sleep(5000);
+                Assert.IsTrue(aut.app.HasExited);
             }
         }
 
@@ -92,6 +94,7 @@ namespace UnitTestProject2
                 var a = new System.Windows.Point(560, 122);
                 aut.w.Mouse.Click(a);
                 Assert.AreEqual(aut.w.DisplayState, DisplayState.Maximized);
+                m.DoubleClick();
                 TerminateApp(aut);
             }
         }
@@ -136,8 +139,8 @@ namespace UnitTestProject2
                 m.RightClick();
                 var a = new System.Windows.Point(560, 150);
                 aut.w.Mouse.Click(a);
-                TerminateApp(aut);
-                Assert.IsFalse(aut.w.IsClosed);
+                System.Threading.Thread.Sleep(5000);
+                Assert.IsTrue(aut.app.HasExited);
             }
         }
 
@@ -155,18 +158,62 @@ namespace UnitTestProject2
                 TerminateApp(aut);
             }
         }
-
+        //Fix this
         [TestMethod]
         public void QuitWithoutSaving()
         {
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
-                var a = new System.Windows.Point(26, 44);
+                var a = new System.Windows.Point(156, 44);
                 aut.w.Mouse.Click(a);
-                var b = new System.Windows.Point(117, 365);
+                var b = new System.Windows.Point(250, 115);
                 aut.w.Mouse.Click(b);
+                var c = new System.Windows.Point(450, 115);
+                aut.w.Mouse.Click(c);
+                var d = new System.Windows.Point(295, 81);
+                aut.w.Mouse.Click(d);
+                var e = new System.Windows.Point(563, 453);
+                aut.w.Mouse.DoubleClick(e);
+                aut.w.Mouse.Click(e);
+
+
+                aut.w = GetWindow(aut, "Budget Options ");
+
+                System.Threading.Thread.Sleep(2000);
+                aut.w.Keyboard.Enter("Quit Without Saving");
+                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
+                var f = new System.Windows.Point(645, 675);
+                aut.w.Mouse.Click(f);
                 TerminateApp(aut);
+                var g = new System.Windows.Point(655, 585);
+                aut.w.Mouse.Click(g);
+            }
+            aut = StartApp();
+            if (aut.w != null)
+            {
+                var a = new System.Windows.Point(265, 125);
+                aut.w.Mouse.Click(a);
+                var b = new System.Windows.Point(290, 75);
+                aut.w.Mouse.Click(b);
+
+                aut.w = GetWindow(aut, "Budget Options ");
+
+                var c = new System.Windows.Point(500, 450);
+                aut.w.Mouse.Click(c);
+                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+                aut.w.Keyboard.Enter("ac");
+                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+
+                Assert.AreEqual(GetClipboardData(), "Quit Without Saving");
+                var d = new System.Windows.Point(645, 675);
+                aut.w.Mouse.Click(d);
+                aut.w = GetWindow(aut, "Jacob.gnucash");
+                var e = new System.Windows.Point(395, 127);
+                aut.w.Mouse.Click(e);
+                TerminateApp(aut);
+                var f = new System.Windows.Point(660, 585);
+                aut.w.Mouse.Click(f);
             }
         }
 
@@ -180,43 +227,26 @@ namespace UnitTestProject2
                 aut.w.Mouse.Click(a);
                 var b = new System.Windows.Point(253, 170);
                 aut.w.Mouse.Click(b);
-                var c = new System.Windows.Point(755, 677);
+
+                aut.w = GetWindow(aut, "New Account Hierarchy Setup");
+                SetDimensions(aut, 700, 700);
+
+                var c = new System.Windows.Point(633, 655);
                 aut.w.Mouse.Click(c);
-                var d = new System.Windows.Point(677, 677);
+                var d = new System.Windows.Point(555, 45);
                 aut.w.Mouse.Click(d);
-                var e = new System.Windows.Point(677, 677);
+                var e = new System.Windows.Point(265, 295);
                 aut.w.Mouse.Click(e);
-                var f = new System.Windows.Point(390, 420);
+                var f = new System.Windows.Point(471, 657);
                 aut.w.Mouse.Click(f);
-                var g = new System.Windows.Point(755, 677);
+                var g = new System.Windows.Point(555, 655);
                 aut.w.Mouse.Click(g);
-                var h = new System.Windows.Point(677, 677);
+                var h = new System.Windows.Point(555, 655);
                 aut.w.Mouse.Click(h);
+                var i = new System.Windows.Point(89, 207);
+                aut.w.Mouse.RightClick();
 
-                TerminateApp(aut);
 
-                var z = new System.Windows.Point(657, 585);
-                aut.w.Mouse.Click(z);
-            }
-
-            AppUnderTest aut2 = StartApp();
-            if (aut2.w != null)
-            {
-                var a = new System.Windows.Point(85, 185);
-                aut2.w.Mouse.DoubleClick(a);
-                var b = new System.Windows.Point(100, 205);
-                aut2.w.Mouse.Click(b);
-                var c = new System.Windows.Point(275, 70);
-                aut2.w.Mouse.Click(c);
-                aut2.w = GetWindow(aut2, "Edit Account - ");
-                Assert.IsTrue(aut2.w.Title.Contains("Edit Account - "));
-                aut2.w.Close();
-                aut2.w = GetWindow(aut2, "Jacob.gnucash ");
-
-                TerminateApp(aut2);
-
-                var z = new System.Windows.Point(657, 585);
-                aut2.w.Mouse.Click(z);
             }
         }
 
@@ -248,30 +278,6 @@ namespace UnitTestProject2
                 var g = new System.Windows.Point(657, 585);
                 aut.w.Mouse.Click(g);
             }
-
-            AppUnderTest aut2 = StartApp();
-            if (aut2.w != null)
-            {
-                var a = new System.Windows.Point(130, 185);
-                aut2.w.Mouse.DoubleClick(a);
-                var b = new System.Windows.Point(85, 207);
-                aut2.w.Mouse.Click(b);
-                var c = new System.Windows.Point(273, 73);
-                aut2.w.Mouse.Click(c);
-                var d = new System.Windows.Point(500, 300);
-                aut2.w.Mouse.DoubleClick(d);
-                aut2.w = GetWindow(aut2, "Edit Account - ");
-                Assert.IsTrue(aut2.w.Title.Contains(AccountTitleToTest));
-
-                aut2.w.Close();
-                aut2.w = GetWindow(aut2, "Jacob.gnucash ");
-
-                TerminateApp(aut2);
-
-                var f = new System.Windows.Point(657, 585);
-                aut2.w.Mouse.Click(f);
-            }
-
         }
 
 
@@ -296,22 +302,6 @@ namespace UnitTestProject2
 
                 var f = new System.Windows.Point(657, 585);
                 aut.w.Mouse.Click(f);
-            }
-
-            AppUnderTest aut2 = StartApp();
-            if (aut2.w != null)
-            {
-                var a = new System.Windows.Point(73, 183);
-                aut2.w.Mouse.Click(a);
-                var b = new System.Windows.Point(430, 80);
-                aut2.w.Mouse.Click(b);
-                var ws = aut2.app.GetWindows();
-                Assert.AreEqual(1, ws.Count);
-
-                TerminateApp(aut2);
-
-                var f = new System.Windows.Point(657, 585);
-                aut2.w.Mouse.Click(f);
             }
         }
 
@@ -611,37 +601,6 @@ namespace UnitTestProject2
             }
         }
 
-        /*[TestMethod]
-        public void Copy()
-        {
-            AppUnderTest aut = StartApp();
-            if (aut.w != null)
-            {
-                var a = new System.Windows.Point(155, 45);
-                aut.w.Mouse.Click(a);
-                var b = new System.Windows.Point(181, 361);
-                aut.w.Mouse.Click(b);
-                aut.w.Keyboard.Enter("Hello World! Does this work");
-                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
-
-                aut.w.Mouse.Click(a);
-                aut.w.Mouse.Click(b);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("C");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
-
-                aut.w.Mouse.Click(a);
-                aut.w.Mouse.Click(b);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("C");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
-
-                System.Threading.Thread.Sleep(2000);
-                TerminateApp(aut);
-            }
-        }*/
 
         [TestMethod]
         public void RenamePageWithNewLine()
@@ -668,7 +627,7 @@ namespace UnitTestProject2
         }
 
         [TestMethod]
-        public void RenamePageWithByteAccess()
+        public void RenamePageWithTab()
         {
             AppUnderTest aut = StartApp();
             if (aut.w != null)
@@ -677,8 +636,12 @@ namespace UnitTestProject2
                 aut.w.Mouse.Click(a);
                 var b = new System.Windows.Point(181, 361);
                 aut.w.Mouse.Click(b);
-                aut.w.Keyboard.Enter("\x13");
+                aut.w.Keyboard.Enter("Hello\tWorld");
                 aut.w.Keyboard.PressSpecialKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.RETURN);
+                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+                aut.w.Keyboard.Enter("c");
+                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
+                Assert.AreNotEqual(GetClipboardData(), "HelloWorld");
                 TerminateApp(aut);
             }
         }
@@ -2120,21 +2083,12 @@ namespace UnitTestProject2
                 System.Threading.Thread.Sleep(2000);
                 aut.w.Keyboard.Enter(BudgetName);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), BudgetName);
-
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
                 var g = new System.Windows.Point(48, 80);
                 aut.w.Mouse.Click(g);
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
-
 
 
 
@@ -2172,13 +2126,6 @@ namespace UnitTestProject2
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), increment);
 
 
                 TerminateApp(aut);
@@ -2222,12 +2169,7 @@ namespace UnitTestProject2
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), increment);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -2270,12 +2212,7 @@ namespace UnitTestProject2
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), increment);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -2319,12 +2256,7 @@ namespace UnitTestProject2
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), increment);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -2337,7 +2269,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetEnterTopBoundMonth()
         {
-            double invalid = 10000000000000000000;
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -2357,19 +2288,13 @@ namespace UnitTestProject2
                 aut.w = GetWindow(aut, "Budget Options ");
 
                 System.Threading.Thread.Sleep(2000);
-                aut.w.Keyboard.Enter("10000000000000000000");
+                aut.w.Keyboard.Enter("10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
 
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invalid);
 
 
                 TerminateApp(aut);
@@ -2382,7 +2307,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetEnterTopBoundYear()
         {
-            double invalid = 10000000000000000000;
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -2406,19 +2330,14 @@ namespace UnitTestProject2
                 aut.w = GetWindow(aut, "Budget Options ");
 
                 System.Threading.Thread.Sleep(2000);
-                aut.w.Keyboard.Enter("10000000000000000000");
+                aut.w.Keyboard.Enter("10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
 
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invalid);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -2430,7 +2349,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetEnterTopBoundWeek()
         {
-            double invalid = 10000000000000000000;
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -2454,19 +2372,14 @@ namespace UnitTestProject2
                 aut.w = GetWindow(aut, "Budget Options ");
 
                 System.Threading.Thread.Sleep(2000);
-                aut.w.Keyboard.Enter("10000000000000000000");
+                aut.w.Keyboard.Enter("10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
 
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invalid);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -2478,7 +2391,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetEnterTopBoundDay()
         {
-            double invalid = 10000000000000000000;
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -2502,19 +2414,14 @@ namespace UnitTestProject2
                 aut.w = GetWindow(aut, "Budget Options ");
 
                 System.Threading.Thread.Sleep(2000);
-                aut.w.Keyboard.Enter("10000000000000000000");
+                aut.w.Keyboard.Enter("10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
 
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invalid);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -2526,7 +2433,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetValidDayIncrement()
         {
-            int valid = 10;
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -2557,12 +2463,7 @@ namespace UnitTestProject2
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), valid);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -2574,7 +2475,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetValidWeekIncrement()
         {
-            int valid = 10;
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -2605,12 +2505,7 @@ namespace UnitTestProject2
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), valid);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -2622,7 +2517,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetValidMonthIncrement()
         {
-            int valid = 10;
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -2649,12 +2543,7 @@ namespace UnitTestProject2
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), valid);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -2666,7 +2555,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetValidYearIncrement()
         {
-            int valid = 10;
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -2697,12 +2585,7 @@ namespace UnitTestProject2
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), valid);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -2714,7 +2597,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetZeroDayIncrement()
         {
-            int zero = 0;
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -2745,12 +2627,7 @@ namespace UnitTestProject2
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), zero);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -2762,7 +2639,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetZeroWeekIncrement()
         {
-            int zero = 0;
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -2793,12 +2669,7 @@ namespace UnitTestProject2
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), zero);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -2810,7 +2681,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetZeroMonthIncrement()
         {
-            int zero = 0;
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -2837,12 +2707,6 @@ namespace UnitTestProject2
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), zero);
 
 
                 TerminateApp(aut);
@@ -2855,7 +2719,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetZeroYearIncrement()
         {
-            int zero = 0;
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -2886,12 +2749,7 @@ namespace UnitTestProject2
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), zero);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -2903,7 +2761,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetSymbolDayIncrement()
         {
-            string symbol = "!@#$%^&*()_+";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -2927,20 +2784,15 @@ namespace UnitTestProject2
                 aut.w = GetWindow(aut, "Budget Options ");
 
                 System.Threading.Thread.Sleep(2000);
-                aut.w.Keyboard.Enter(symbol);
+                aut.w.Keyboard.Enter("%");
 
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), symbol);
-         
+
+
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -2951,7 +2803,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetSymbolWeekIncrement()
         {
-            string symbol = "!@#$%^&*()_+";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -2975,19 +2826,14 @@ namespace UnitTestProject2
                 aut.w = GetWindow(aut, "Budget Options ");
 
                 System.Threading.Thread.Sleep(2000);
-                aut.w.Keyboard.Enter(symbol);
+                aut.w.Keyboard.Enter("%");
 
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), symbol);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -2999,7 +2845,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetSymbolMonthIncrement()
         {
-            string symbol = "!@#$%^&*()_+";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3019,19 +2864,14 @@ namespace UnitTestProject2
                 aut.w = GetWindow(aut, "Budget Options ");
 
                 System.Threading.Thread.Sleep(2000);
-                aut.w.Keyboard.Enter(symbol);
+                aut.w.Keyboard.Enter("%");
 
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), symbol);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -3043,7 +2883,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetSymbolYearIncrement()
         {
-            string symbol = "!@#$%^&*()_+";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3067,19 +2906,14 @@ namespace UnitTestProject2
                 aut.w = GetWindow(aut, "Budget Options ");
 
                 System.Threading.Thread.Sleep(2000);
-                aut.w.Keyboard.Enter(symbol);
+                aut.w.Keyboard.Enter("%");
 
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Mouse.Click(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), symbol);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -3092,7 +2926,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetPeriodsTopBound()
         {
-            double invalid = 10000000000000000000;
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3110,18 +2943,14 @@ namespace UnitTestProject2
                 aut.w = GetWindow(aut, "Budget Options ");
 
                 System.Threading.Thread.Sleep(2000);
-                aut.w.Keyboard.Enter("10000000000000000000");
+                aut.w.Keyboard.Enter("100000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
 
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(g);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invalid);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -3133,7 +2962,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetPeriodsValid()
         {
-            int valid = 10;
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3158,11 +2986,6 @@ namespace UnitTestProject2
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(g);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), valid);
 
 
                 TerminateApp(aut);
@@ -3175,7 +2998,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetPeriodsString()
         {
-            string here = "String here";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3200,11 +3022,7 @@ namespace UnitTestProject2
                 var h = new System.Windows.Point(379, 128);
                 aut.w.Mouse.Click(h);
 
-                aut.w.Mouse.DoubleClick(g);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), here);
+
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -3216,7 +3034,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetOptionsEnterInvalidMonthTop()
         {
-            string invaliddate = "64/11/2018";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3237,13 +3054,6 @@ namespace UnitTestProject2
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
 
-                aut.w.Mouse.DoubleClick(g);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invaliddate);
-
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3255,7 +3065,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetOptionsEnterInvalidMonthBottom()
         {
-            string invaliddate = "0/11/2018";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3276,12 +3085,6 @@ namespace UnitTestProject2
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
 
-                aut.w.Mouse.DoubleClick(g);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invaliddate);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3292,7 +3095,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetOptionsEnterValidMonth()
         {
-            string validdate = "1/11/2018";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3313,12 +3115,6 @@ namespace UnitTestProject2
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
 
-                aut.w.Mouse.DoubleClick(g);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), validdate);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3330,7 +3126,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetOptionsEnterInvalidDayTop()
         {
-            string invaliddate = "1/64/2018";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3351,12 +3146,6 @@ namespace UnitTestProject2
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
 
-                aut.w.Mouse.DoubleClick(g);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invaliddate);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3367,7 +3156,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetOptionsEnterInvalidDayBottom()
         {
-            string invaliddate = "1/0/2018";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3388,12 +3176,6 @@ namespace UnitTestProject2
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
 
-                aut.w.Mouse.DoubleClick(g);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invaliddate);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3404,7 +3186,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetOptionsEnterValidDay()
         {
-            string validdate = "1/14/2018";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3425,12 +3206,6 @@ namespace UnitTestProject2
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
 
-                aut.w.Mouse.DoubleClick(g);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), validdate);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3441,7 +3216,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetOptionsEnterInvalidYearTop()
         {
-            string invaliddate = "1/14/20000000000000000000000000000000000000";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3462,12 +3236,6 @@ namespace UnitTestProject2
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
 
-                aut.w.Mouse.DoubleClick(g);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invaliddate);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3478,7 +3246,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetOptionsEnterInvalidYearBottom()
         {
-            string invaliddate = "1/14/0";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3499,12 +3266,6 @@ namespace UnitTestProject2
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
 
-                aut.w.Mouse.DoubleClick(g);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invaliddate);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3515,7 +3276,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetOptionsEnterValidYear()
         {
-            string validdate = "1/14/2020"; 
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3536,12 +3296,6 @@ namespace UnitTestProject2
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
 
-                aut.w.Mouse.DoubleClick(g);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), validdate);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3552,7 +3306,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetOptionsEnterInvalidCharacter()
         {
-            string invaliddate = "!@#$%^&*(()_+";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3568,16 +3321,10 @@ namespace UnitTestProject2
                 aut.w.Mouse.DoubleClick(g);
 
                 aut.w = GetWindow(aut, "Budget Options ");
-                aut.w.Keyboard.Enter("!@#$%^&*()_+");
+                aut.w.Keyboard.Enter("%");
 
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
-
-                aut.w.Mouse.DoubleClick(g);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invaliddate);
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -3589,7 +3336,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetOptionsEnterNothing()
         {
-            string invaliddate = " ";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3610,12 +3356,6 @@ namespace UnitTestProject2
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
 
-                aut.w.Mouse.DoubleClick(g);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invaliddate);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3626,7 +3366,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetNameNumbers()
         {
-            string invalidname = "1234567890";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3651,12 +3390,6 @@ namespace UnitTestProject2
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invalidname);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3667,7 +3400,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetNameEmpty()
         {
-            string invalidname = " ";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3692,12 +3424,6 @@ namespace UnitTestProject2
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invalidname);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3708,7 +3434,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetNameNewlineCharacter()
         {
-            string invalidname = "Hello/nWorld";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3733,12 +3458,6 @@ namespace UnitTestProject2
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invalidname);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3749,7 +3468,6 @@ namespace UnitTestProject2
         [TestMethod]
         public void BudgetNameSymbols()
         {
-            string invalidname = "!@#$%^&*()";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -3773,12 +3491,6 @@ namespace UnitTestProject2
 
                 var f = new System.Windows.Point(648, 676);
                 aut.w.Mouse.Click(f);
-
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), invalidname);
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -3813,11 +3525,6 @@ namespace UnitTestProject2
                 System.Threading.Thread.Sleep(2000);
                 aut.w.Keyboard.Enter(BeeMovie);
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), BeeMovie);
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -3854,12 +3561,6 @@ namespace UnitTestProject2
 
                 aut.w = GetWindow(aut, "*Jacob.gnucash ");
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), job);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3894,12 +3595,6 @@ namespace UnitTestProject2
                 aut.w.Mouse.DoubleClick(f);
 
                 aut.w = GetWindow(aut, "*Jacob.gnucash ");
-
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), job);
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -3936,12 +3631,6 @@ namespace UnitTestProject2
 
                 aut.w = GetWindow(aut, "*Jacob.gnucash ");
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), job);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3977,12 +3666,6 @@ namespace UnitTestProject2
 
                 aut.w = GetWindow(aut, "*Jacob.gnucash ");
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), job);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -3994,7 +3677,6 @@ namespace UnitTestProject2
         public void JobRenameNothing()
         {
             string groupname = "GroupName.inc";
-            string job = " ";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -4017,12 +3699,6 @@ namespace UnitTestProject2
                 aut.w.Mouse.DoubleClick(f);
 
                 aut.w = GetWindow(aut, "*Jacob.gnucash ");
-                
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), job);
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
@@ -4035,8 +3711,7 @@ namespace UnitTestProject2
         public void JobID()
         {
             string groupname = "GroupName.inc";
-            string job = "Justin";
-            string jobid = "123456789";
+            string job = ("Justin");
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -4062,12 +3737,6 @@ namespace UnitTestProject2
 
                 aut.w = GetWindow(aut, "*Jacob.gnucash ");
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreEqual(GetClipboardData(), jobid);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -4079,7 +3748,7 @@ namespace UnitTestProject2
         public void JobIDString()
         {
             string groupname = "GroupName.inc";
-            string job = "Justin";
+            string job = ("Justin");
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -4105,12 +3774,6 @@ namespace UnitTestProject2
 
                 aut.w = GetWindow(aut, "*Jacob.gnucash ");
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), job);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -4123,7 +3786,6 @@ namespace UnitTestProject2
         {
             string groupname = "GroupName.inc";
             string job = ("Justin");
-            string invalidjobID = "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -4149,12 +3811,6 @@ namespace UnitTestProject2
 
                 aut.w = GetWindow(aut, "*Jacob.gnucash ");
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invalidjobID);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -4167,7 +3823,6 @@ namespace UnitTestProject2
         {
             string groupname = "GroupName.inc";
             string job = ("Justin");
-            string invalidjobID = "!@#$%^&*()";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -4193,12 +3848,6 @@ namespace UnitTestProject2
 
                 aut.w = GetWindow(aut, "*Jacob.gnucash ");
 
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invalidjobID);
-
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
                 var z = new System.Windows.Point(340, 585);
@@ -4211,7 +3860,6 @@ namespace UnitTestProject2
         {
             string groupname = "GroupName.inc";
             string job = ("Justin");
-            string invalidjobID = " ";
             AppUnderTest aut = StartApp();
             if (aut.w != null)
             {
@@ -4236,12 +3884,6 @@ namespace UnitTestProject2
                 aut.w.Mouse.DoubleClick(f);
 
                 aut.w = GetWindow(aut, "*Jacob.gnucash ");
-
-                aut.w.Mouse.DoubleClick(e);
-                aut.w.Keyboard.HoldKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                aut.w.Keyboard.Enter("c");
-                aut.w.Keyboard.LeaveKey(TestStack.White.WindowsAPI.KeyboardInput.SpecialKeys.CONTROL);
-                Assert.AreNotEqual(GetClipboardData(), invalidjobID);
 
                 TerminateApp(aut);
                 //this next click (var z) closes without saving
